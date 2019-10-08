@@ -8,6 +8,11 @@
 .cloud
 .google.token
 
+# Ignore files
+*.log
+*.db
+.HA_VERSION
+
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
 ip_bans.yaml
 secrets.yaml
