@@ -13,6 +13,11 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
+# MQTT broker
+mqtt:
+  broker: 192.168.10.21
+  client_id: homeassistant
+
 # Vaillant control
 ebusd:
     host: 192.168.10.21
