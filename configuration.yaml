@@ -17,6 +17,17 @@ script: !include scripts.yaml
 recorder:
   db_url: 'sqlite:///@SMARTHOME_RPI_MNT_DATA@/home-assistant_v2.db'
 
+  # Telegram Bot
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret telegram_chat_id
+
+notify:
+    platform: telegram
+    chat_id: !secret telegram_chat_id
+
 # MQTT broker
 mqtt:
   broker: !secret vaillant_ip
