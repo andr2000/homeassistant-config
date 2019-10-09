@@ -19,12 +19,12 @@ recorder:
 
 # MQTT broker
 mqtt:
-  broker: 192.168.10.21
+  broker: !secret vaillant_ip
   client_id: homeassistant
 
 # Vaillant control
 ebusd:
-  host: 192.168.10.21
+  host: !secret vaillant_ip
   port: 8888
   name: 'ebusd'
   circuit: 'bai'
