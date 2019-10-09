@@ -20,12 +20,12 @@ mqtt:
 
 # Vaillant control
 ebusd:
-    host: 192.168.10.21
-    port: 8888
-    name: 'ebusd'
-    circuit: 'bai'
-    monitored_conditions:
-      - 'ReturnTemperature'
+  host: 192.168.10.21
+  port: 8888
+  name: 'ebusd'
+  circuit: 'bai'
+  monitored_conditions:
+    - 'ReturnTemperature'
 
 # HWC recirculation pump
 switch:
