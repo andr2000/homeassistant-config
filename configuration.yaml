@@ -13,6 +13,10 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
+# Database location
+recorder:
+  db_url: 'sqlite:///mnt/data/db/home-assistant_v2.db'
+
 # MQTT broker
 mqtt:
   broker: 192.168.10.21
