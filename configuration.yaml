@@ -15,7 +15,7 @@ script: !include scripts.yaml
 
 # Database location
 recorder:
-  db_url: 'sqlite:///@SMARTHOME_RPI_MNT_DATA@/homeassistant/home-assistant_v2.db'
+  db_url: 'sqlite://@SMARTHOME_RPI_MNT_DATA@/homeassistant/home-assistant_v2.db'
 
   # Telegram Bot
 telegram_bot:
