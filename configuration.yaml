@@ -25,8 +25,8 @@ telegram_bot:
       - !secret telegram_chat_id
 
 notify:
-    platform: telegram
-    chat_id: !secret telegram_chat_id
+  platform: telegram
+  chat_id: !secret telegram_chat_id
 
 # MQTT broker
 mqtt:
