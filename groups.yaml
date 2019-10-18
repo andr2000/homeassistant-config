@@ -1,0 +1,6 @@
+ebusd_sensors:               
+  name: Heater sensors            
+  entities:    
+    - sensor.ebusd_returntemp
+    - sensor.ebusd_flame
+    - sensor.ebusd_flowtemp

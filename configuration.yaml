@@ -12,12 +12,22 @@ tts:
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+binary_sensor: !include binary_sensor.yaml
 
-# Database location
-recorder:
-  db_url: 'sqlite://@SMARTHOME_RPI_MNT_DATA@/homeassistant/home-assistant_v2.db'
+# Create UI from configuration file
+#lovelace:
+#  mode: yaml
 
-  # Telegram Bot
+# Example configuration.yaml entry
+logger:
+  default: info
+  logs:
+    homeassistant.components.ebusd: debug
+
+# Enable python scripts in python_scripts folder
+python_script:
+
+# Telegram Bot
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key
@@ -25,8 +35,9 @@ telegram_bot:
       - !secret telegram_chat_id
 
 notify:
-  platform: telegram
-  chat_id: !secret telegram_chat_id
+  - name: telegram
+    platform: telegram
+    chat_id: !secret telegram_chat_id
 
 # MQTT broker
 mqtt:
@@ -37,10 +48,18 @@ mqtt:
 ebusd:
   host: !secret vaillant_ip
   port: 8888
-  name: 'ebusd'
-  circuit: 'bai'
-  monitored_conditions:
-    - 'ReturnTemperature'
+  cache_ttl: 15
+  circuits:
+    - circuit: '700'
+      name: '700'
+      monitored_conditions:
+        - 'PumpStatus'
+    - circuit: 'bai'
+      name: 'bai'
+      monitored_conditions:
+        - 'ReturnTemperature'
+        - 'FlowTemperature'
+        - 'Flame'
 
 # HWC recirculation pump
 switch:

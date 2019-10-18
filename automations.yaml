@@ -1,1 +1,19 @@
-[]
+- alias: 'ebusd_update'
+  trigger:
+    - platform: time_pattern
+      seconds: '/20'
+  action:
+    - service: homeassistant.update_entity
+    - service: python_script.force_update_ebusd
+    - service: notify.telegram
+      data:
+        message: "Return temperature is {{ states('sensor.ebusd_returntemp') }}"
+
+- alias: 'ebusdctl_state'
+  trigger:
+    platform: state
+    entity_id: sensor.ebusdctl_state
+  action:
+    - service: notify.telegram
+      data:
+        message: "e-bus state has changed: {{ states('sensor.ebusdctl_state') }}"

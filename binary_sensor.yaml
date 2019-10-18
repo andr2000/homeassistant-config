@@ -1,0 +1,6 @@
+- platform: template
+  sensors:
+    ebusd_connected:
+      friendly_name: "ebusd connection"
+      device_class: connectivity
+      value_template: "{{ not is_state('sensor.ebusdctl_state', 'ERR: no signal') }}"
