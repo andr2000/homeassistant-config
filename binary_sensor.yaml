@@ -1,6 +1,12 @@
 - platform: template
   sensors:
     ebusd_connected:
-      friendly_name: "ebusd connection"
+      friendly_name: "ebusd signal status"
       device_class: connectivity
-      value_template: "{{ not is_state('sensor.ebusdctl_state', 'ERR: no signal') }}"
+      value_template: >
+        {% if (is_state("sensor.ebusdctl_state", "ERR: no signal") or
+            is_state("sensor.ebusdctl_state", None)) -%}
+          False
+        {% else %}
+          True
+        {%- endif %}
