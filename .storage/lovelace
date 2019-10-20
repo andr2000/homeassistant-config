@@ -10,13 +10,29 @@
                         "device_tracker.oleksandr_s_nexus_5x",
                         "sun.sun"
                     ],
-                    "cards": [],
+                    "cards": [
+                        {
+                            "entity": "sensor.b7v_displayedoutsidetemp",
+                            "graph": "line",
+                            "name": "Outside",
+                            "type": "sensor"
+                        }
+                    ],
                     "path": "default_view",
                     "title": "Home"
                 },
                 {
                     "badges": [],
                     "cards": [
+                        {
+                            "entities": [
+                                "binary_sensor.ebusd_connected"
+                            ],
+                            "hours_to_show": 24,
+                            "refresh_interval": 0,
+                            "title": "e-bus signal",
+                            "type": "history-graph"
+                        },
                         {
                             "entities": [
                                 "switch.sonoff_power"
@@ -38,16 +54,53 @@
                             "type": "sensor"
                         },
                         {
-                            "entities": [
-                                "binary_sensor.ebusd_connected"
-                            ],
-                            "hours_to_show": 24,
-                            "refresh_interval": 0,
-                            "title": "e-bus status",
-                            "type": "history-graph"
+                            "entity": "sensor.b7v_hc1actualflowtempdesired",
+                            "graph": "line",
+                            "type": "sensor"
                         },
                         {
-                            "entity": "sensor.700_hc1pumpstatus",
+                            "entity": "sensor.b7v_hwcstoragetemp",
+                            "graph": "line",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.b7v_hwctempdesired",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.b7v_z1daytemp",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.b7v_z1nighttemp",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.b7v_z1roomtemp",
+                            "graph": "line",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.b7v_z1actualroomtempdesired",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.bai_flowtempdesired",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.bai_modulationtempdesired",
+                            "graph": "line",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.bai_pumppower",
+                            "graph": "line",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.bai_waterpressure",
+                            "graph": "line",
                             "type": "sensor"
                         }
                     ],

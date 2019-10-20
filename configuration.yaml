@@ -50,16 +50,26 @@ ebusd:
   port: 8888
   cache_ttl: 15
   circuits:
-    - circuit: '700'
-      name: '700'
+    - circuit: 'b7v'
+      name: 'b7v'
       monitored_conditions:
-        - 'PumpStatus'
+        - 'ActualFlowTemperatureDesired'
+        - 'Zone1ActualRoomTemperatureDesired'
+        - 'Zone1RoomTemperature'
+        - 'Zone1DayTemperature'
+        - 'Zone1NightTemperature'
+        - 'HWTemperatureDesired'
+        - 'DisplayedOutsideTemp'
+        - 'HwcStorageTemp'
     - circuit: 'bai'
       name: 'bai'
       monitored_conditions:
-        - 'ReturnTemperature'
         - 'FlowTemperature'
-        - 'Flame'
+        - 'DesiredFlowTemperature'
+        - 'ReturnTemperature'
+        - 'ModulationTempDesired'
+        - 'WaterPressure'
+        - 'PumpPower'
 
 # HWC recirculation pump
 switch:
