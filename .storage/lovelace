@@ -1,0 +1,62 @@
+{
+    "data": {
+        "config": {
+            "title": "Home",
+            "views": [
+                {
+                    "badges": [
+                        "binary_sensor.updater",
+                        "person.oleksandr",
+                        "device_tracker.oleksandr_s_nexus_5x",
+                        "sun.sun"
+                    ],
+                    "cards": [],
+                    "path": "default_view",
+                    "title": "Home"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "switch.sonoff_power"
+                            ],
+                            "title": "HWC pump",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "sensor.bai_flowtemp",
+                            "graph": "line",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.bai_flame",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.bai_returntemp",
+                            "type": "sensor"
+                        },
+                        {
+                            "entities": [
+                                "binary_sensor.ebusd_connected"
+                            ],
+                            "hours_to_show": 24,
+                            "refresh_interval": 0,
+                            "title": "e-bus status",
+                            "type": "history-graph"
+                        },
+                        {
+                            "entity": "sensor.700_hc1pumpstatus",
+                            "type": "sensor"
+                        }
+                    ],
+                    "path": "vaillant",
+                    "title": "Vaillant"
+                }
+            ]
+        }
+    },
+    "key": "lovelace",
+    "version": 1
+}
