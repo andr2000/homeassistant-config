@@ -1,22 +1,32 @@
-# You can whitelist files/folders with !, these will not be ignored.
-!*.yaml
+# Ignore...
+*
+# ...but these files
 !.gitignore
+
+!*.yaml
 !*.md
-
-# Ignore folders.
-.storage
-.cloud
-.google.token
-
-# Ignore files
-*.log
-*.db
-.HA_VERSION
-
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
 
-!.storage/*
+!.storage/auth
+!.storage/auth_provider.homeassistant
+!.storage/cloud
+!.storage/core.area_registry
+!.storage/core.device_registry
+!.storage/core.config
+!.storage/core.entity_registry
 !.storage/lovelace
+!.storage/person
+
+!automation/
+!automation/*.yaml
+!binary_sensor/
+!binary_sensor/*.yaml
+!climate/
+!climate/*.yaml
+!python_scripts/
+!python_scripts/*.py
+!sensor/
+!sensor/*.yaml
