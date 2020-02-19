@@ -1,0 +1,61 @@
+################################################################################
+# Setup ebusd messages to poll
+################################################################################
+- alias: 'ebusd setup VRC700f/4 polling priorities'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.ebusd_vrc700f_4_connected
+    to: 'on'
+  action:
+    # Set priority to 1 polling interval: ebusd will add all the below
+    # into its message queue and will query one of the parameters per
+    # polling interval
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/z1RoomTemp/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/HwcStorageTemp/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/Hc1ActualFlowTempDesired/get
+        payload: '?1'
+    # set priority to 2 polling intervals
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/z1DayTemp/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/z1NightTemp/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/HwcTempDesired/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/Hc1HeatCurve/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/Hc1RoomTempSwitchOn/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/Hc1Status/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/Hc1RoomTempSwitchOn/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/z1ActualRoomTempDesired/get
+        payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/HwcOpMode/get
+        payload: '?2'

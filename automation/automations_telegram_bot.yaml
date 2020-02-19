@@ -1,0 +1,64 @@
+################################################################################
+# Handle telegram status command
+################################################################################
+- alias: 'Telegram reply with status'
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/status'
+  action:
+    - service: notify.telegram
+      data_template:
+        message: "
+          Climate is {{ state_attr('climate.thermostat_mode', 'hvac_action') }}
+          and the current temperature is {{ state_attr('climate.thermostat_mode', 'current_temperature') }}
+
+          HWC is {{ state_attr('climate.hot_water', 'hvac_action') }}
+          and the current temperature is {{ state_attr('climate.hot_water','current_temperature') }}
+
+          Outside temperature is {{ states('sensor.ebusd_outside_temperature') }}
+
+          Gas meter {{ states('sensor.gas_meter') }}, m3; daily {{ states('sensor.gas_daily_peak') }}, m3; monthly {{ states('sensor.gas_monthly_peak') }}, m3
+        "
+
+################################################################################
+# Handle telegram gas meter command
+################################################################################
+- alias: 'Telegram reply with gas stats'
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/gas'
+  action:
+    - service: notify.telegram
+      data_template:
+        message: "
+          {{ now().strftime('%Y-%m-%d %H:%M:%S') }},{{ trigger.event.data.args[0] }},{{ states('sensor.ebusd_bai_heating_energy_sum') }},{{ states('sensor.ebusd_bai_hwc_energy_sum') }},1,
+        "
+
+################################################################################
+# Report current status
+################################################################################
+- alias: 'Telegram report status'
+  trigger:
+    platform: time_pattern
+    minutes: "/20"
+  action:
+    - service: notify.telegram
+      data_template:
+        message: "
+          e-bus date/time {{ states('sensor.ebusd_system_time') }}
+
+          Outside {{ states('sensor.ebusd_outside_temperature') }}
+
+          Flow {{ states('sensor.ebusd_bai_flow_temperature') }} (desired {{ states('sensor.ebusd_vrc700f_4_flow_desired') }}) Return {{ states('sensor.ebusd_bai_return_temperature') }} Flame {{ states('binary_sensor.ebusd_bai_flame_status') }}
+
+          Power {{ states('sensor.ebusd_bai_heating_power') }} kW Pump power {{ states('sensor.ebusd_bai_pump_power') }}% {{ states('sensor.gas_meter') }} m3
+
+
+          Room: current {{ state_attr('climate.thermostat_mode', 'current_temperature') }} night {{ state_attr('climate.night_temperature', 'current_temperature') }} day {{ state_attr('climate.day_temperature', 'current_temperature') }}
+
+          Hwc: current {{ states('sensor.ebusd_vrc700f_4_hwc_storage_temperature') }} target {{ states('sensor.ebusd_vrc700f_4_hwc_desired_temperature') }}
+        "

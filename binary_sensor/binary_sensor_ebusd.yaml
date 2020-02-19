@@ -1,0 +1,69 @@
+################################################################################
+# ebusd connection and signal sensors
+################################################################################
+# TODO: According to HA MQTT binary sensor documentation:
+# "The binary sensor state will be updated only after a new message is
+# published on state_topic matching payload_on or payload_off. If these
+# messages are published with the retain flag set, the binary sensor will
+# receive an instant state update after subscription and Home Assistant will
+# display the correct state on startup. Otherwise, the initial state
+# displayed in Home Assistant will be unknown."
+#
+# So, if ebusd has already acquired the signal the initial state of the
+# binary sensor below won't trigger from "unknown" to "{on|off}", thus
+# all relevant automations won't trigger on start up.
+- platform: mqtt
+  name: "ebusd connected"
+  device_class: connectivity
+  state_topic: "ebusd/global/running"
+  payload_on: "true"
+  payload_off: "false"
+  qos: 2
+
+- platform: mqtt
+  name: "ebusd signal acquired"
+  device_class: connectivity
+  state_topic: "ebusd/global/signal"
+  payload_on: "true"
+  payload_off: "false"
+  availability_topic: "ebusd/global/running"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 2
+
+################################################################################
+# handle ebusd scan results
+# FIXME: unfortunately there are no wildcards available inside topic name,
+# so we have to hardcode
+# N.B. value_template must return the state in capital, e.g. ON/OFF, not
+# on/off
+################################################################################
+- platform: mqtt
+  name: "ebusd BAI connected"
+  device_class: connectivity
+  state_topic: "ebusd/scan.08/id"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 2
+  value_template: >
+    {% if "0010021961" in value %}
+      ON
+    {% else %}
+      OFF
+    {% endif %}
+
+- platform: mqtt
+  name: "ebusd VRC700f/4 connected"
+  device_class: connectivity
+  state_topic: "ebusd/scan.15/id"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 2
+  value_template: >
+    {% if "0020197207" in value %}
+      ON
+    {% else %}
+      OFF
+    {% endif %}

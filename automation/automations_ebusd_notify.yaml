@@ -1,0 +1,22 @@
+################################################################################
+# Notify on ebusd connection and signal changes
+################################################################################
+- alias: 'on ebusd connection state change'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.ebusd_connected
+  action:
+    - service: notify.notify
+      data:
+        message: "e-bus connection state has changed: {{ states
+        ('binary_sensor.ebusd_connected') }}"
+
+- alias: 'on ebusd signal acquired change'
+  trigger:
+      platform: state
+      entity_id: binary_sensor.ebusd_signal_acquired
+  action:
+    - service: notify.telegram
+      data:
+        message: "e-bus signal has changed: {{ states
+        ('binary_sensor.ebusd_signal_acquired') }}"

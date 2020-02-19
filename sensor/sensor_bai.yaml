@@ -1,0 +1,131 @@
+################################################################################
+# BAI sensors
+################################################################################
+- platform: mqtt
+  name: "ebusd BAI flow temperature"
+  device_class: temperature
+  unit_of_measurement: "°C"
+  state_topic: "ebusd/bai/FlowTemp"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 29.25;ok
+  value_template: >
+    {% set values = value.split(";") %}
+    {% if values[1] == "ok" %}
+      {{ values[0] | float }}
+    {% else %}
+       {{ values[1] }}
+    {% endif %}
+
+- platform: mqtt
+  name: "ebusd BAI return temperature"
+  device_class: temperature
+  unit_of_measurement: "°C"
+  state_topic: "ebusd/bai/ReturnTemp"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 26.06;65118;ok
+  value_template: >
+    {% set values = value.split(";") %}
+    {% if values[2] == "ok" %}
+      {{ values[0] | float }}
+    {% else %}
+       {{ values[2] }}
+    {% endif %}
+
+- platform: mqtt
+  name: "ebusd BAI pump power"
+  unit_of_measurement: "%"
+  state_topic: "ebusd/bai/PumpPower"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 15
+
+- platform: mqtt
+  name: "ebusd BAI water pressure"
+  device_class: pressure
+  unit_of_measurement: "Bar"
+  state_topic: "ebusd/bai/WaterPressure"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 1.948;ok
+  value_template: >
+    {% set values = value.split(";") %}
+    {% if values[1] == "ok" %}
+      {{ values[0] | float }}
+    {% else %}
+       {{ values[1] }}
+    {% endif %}
+
+- platform: mqtt
+  name: "ebusd BAI heating power"
+  device_class: power
+  unit_of_measurement: "kW"
+  state_topic: "ebusd/bai/ModulationTempDesired"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 16.0
+  # TODO: 20.0 stands for ebusd/bai/PartloadHcKW
+  value_template: >
+    {% if is_state("binary_sensor.ebusd_bai_flame_status", "on") %}
+      {{ value | float * 20 / 100 }}
+    {% else %}
+      0
+    {% endif %}
+
+- platform: mqtt
+  name: "ebusd BAI valve position"
+  unit_of_measurement: "%"
+  state_topic: "ebusd/bai/PositionValveSet"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 100 = DHW, 0 = heating, 40 = middle position
+
+- platform: mqtt
+  name: "ebusd BAI HWC energy sum"
+  state_topic: "ebusd/bai/PrEnergySumHwc1"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 95512250
+
+- platform: mqtt
+  name: "ebusd BAI HWC energy count"
+  state_topic: "ebusd/bai/PrEnergyCountHwc1"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 242866
+
+- platform: mqtt
+  name: "ebusd BAI heating energy sum"
+  state_topic: "ebusd/bai/PrEnergySumHc1"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 1718464911
+
+- platform: mqtt
+  name: "ebusd BAI heating energy count"
+  state_topic: "ebusd/bai/PrEnergyCountHc1"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 1718464911
+

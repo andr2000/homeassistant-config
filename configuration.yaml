@@ -5,27 +5,70 @@ default_config:
 # http:
 #   base_url: example.duckdns.org:8123
 
-# Text to speech
-tts:
-  - platform: google_translate
-
+automation: !include_dir_merge_list automation/
+binary_sensor: !include_dir_merge_list binary_sensor/
+climate: !include_dir_merge_list climate/
 group: !include groups.yaml
-automation: !include automations.yaml
 script: !include scripts.yaml
-binary_sensor: !include binary_sensor.yaml
+sensor: !include_dir_merge_list sensor/
 
-# Create UI from configuration file
-#lovelace:
-#  mode: yaml
+utility_meter:
+  gas_daily:
+    source: sensor.gas_meter
+    cycle: daily
+    tariffs:
+      - peak
+  gas_monthly:
+    source: sensor.gas_meter
+    cycle: monthly
+    tariffs:
+      - peak
 
-# Example configuration.yaml entry
+recorder:
+  db_url: !secret postgresql
+
+influxdb:
+  host: !secret influxdb_ip
+  username: !secret influxdb_user
+  password: !secret influxdb_password
+  max_retries: 3
+  default_measurement: state
+  database: hass
+  tags:
+    instance: prod
+    source: hass
+  include:
+    entities:
+      - sensor.ebusd_bai_heating_energy_count
+      - sensor.ebusd_bai_heating_energy_sum
+      - sensor.ebusd_bai_hwc_energy_count
+      - sensor.ebusd_bai_hwc_energy_sum
+      - sensor.ebusd_bai_heating_power
+      - sensor.ebusd_bai_flow_temperature
+      - sensor.ebusd_bai_heating_power
+      - sensor.ebusd_bai_pump_power
+      - sensor.ebusd_bai_return_temperature
+      - sensor.ebusd_bai_valve_position
+      - sensor.ebusd_bai_water_pressure
+      - sensor.ebusd_outside_temperature
+      - sensor.ebusd_vrc700f_4_day_temperature
+      - sensor.ebusd_vrc700f_4_hwc_desired_temperature
+      - sensor.ebusd_vrc700f_4_hwc_storage_temperature
+      - sensor.ebusd_vrc700f_4_night_temperature
+      - sensor.ebusd_vrc700f_4_room_temperature
+      - sensor.ebusd_vrc700f_4_zone1_heating_curve
+      - binary_sensor.ebusd_bai_external_heating_pump
+      - binary_sensor.ebusd_bai_heating_pump
+      - binary_sensor.ebusd_bai_hwc_circulation_pump
+      - binary_sensor.ebusd_bai_connected
+      - binary_sensor.ebusd_bai_flame_status
+      - binary_sensor.ebusd_connected
+      - binary_sensor.ebusd_signal_acquired
+      - binary_sensor.ebusd_vrc700f_4_connected
+      - binary_sensor.hwc_pump_status
+
 logger:
   default: info
-  logs:
-    homeassistant.components.ebusd: debug
-
-# Enable python scripts in python_scripts folder
-python_script:
 
 # Telegram Bot
 telegram_bot:
@@ -42,46 +85,7 @@ notify:
 # MQTT broker
 mqtt:
   broker: !secret vaillant_ip
-  client_id: homeassistant
+  client_id: homeassistant1
 
-# Vaillant control
-ebusd:
-  host: !secret vaillant_ip
-  port: 8888
-  cache_ttl: 15
-  circuits:
-    - circuit: 'b7v'
-      name: 'b7v'
-      monitored_conditions:
-        - 'ActualFlowTemperatureDesired'
-        - 'Zone1ActualRoomTemperatureDesired'
-        - 'Zone1RoomTemperature'
-        - 'Zone1DayTemperature'
-        - 'Zone1NightTemperature'
-        - 'HWTemperatureDesired'
-        - 'DisplayedOutsideTemp'
-        - 'HwcStorageTemp'
-    - circuit: 'bai'
-      name: 'bai'
-      monitored_conditions:
-        - 'FlowTemperature'
-        - 'DesiredFlowTemperature'
-        - 'ReturnTemperature'
-        - 'ModulationTempDesired'
-        - 'WaterPressure'
-        - 'PumpPower'
-
-# HWC recirculation pump
-switch:
-  - platform: mqtt
-    name: "Sonoff power"
-    state_topic: "stat/sonoff-rec-pump/RESULT"
-    value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/sonoff-rec-pump/POWER"
-    availability_topic: "tele/sonoff-rec-pump/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+# ESPhome
+esphome:

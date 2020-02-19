@@ -1,0 +1,20 @@
+################################################################################
+# Turn on/off external HC pump according to BAI's state
+################################################################################
+- alias: 'turn ext hc pump off'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.ebusd_bai_external_heating_pump
+    to: 'off'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.hc_pump
+
+- alias: 'turn ext hc pump on'
+  trigger:                                                                      
+    platform: state                                                             
+    entity_id: binary_sensor.ebusd_bai_external_heating_pump
+    to: 'on'
+  action:                         
+    - service: switch.turn_on
+      entity_id: switch.hc_pump

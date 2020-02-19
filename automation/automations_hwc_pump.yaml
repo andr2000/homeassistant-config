@@ -1,0 +1,20 @@
+################################################################################
+# Turn on/off HWC pump according to BAI's CirPump state
+################################################################################
+- alias: 'turn hwc pump off'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.ebusd_bai_hwc_circulation_pump
+    to: 'off'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.hwc_pump
+
+- alias: 'turn hwc pump on'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.ebusd_bai_hwc_circulation_pump
+    to: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.hwc_pump

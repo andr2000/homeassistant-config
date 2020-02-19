@@ -1,9 +1,0 @@
-- alias: 'ebusdctl_state'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ebusd_connected
-  action:
-    - service: notify.telegram
-      data:
-        message: "e-bus state has changed, connected {{ states('binary_sensor
-        .ebusd_connected') }}"

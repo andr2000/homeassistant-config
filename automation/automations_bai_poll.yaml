@@ -1,0 +1,74 @@
+################################################################################
+# Setup ebusd messages to poll
+################################################################################
+- alias: 'ebusd setup BAI polling priorities'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.ebusd_bai_connected
+    to: 'on'
+  action:
+    # Set priority to 1 polling interval: ebusd will add all the below
+    # into its message queue and will query one of the parameters per
+    # polling interval
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/FlowTemp/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/ReturnTemp/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/Flame/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/WaterPressure/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/PumpPower/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/ModulationTempDesired/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/PositionValveSet/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/CirPump/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/WP/get
+        payload: '?1'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/extWP/get
+        payload: '?1'
+    # set priority to 9 polling intervals
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/FlowTempDesired/get
+        payload: '?9'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/PrEnergySumHwc1/get
+        payload: '?9'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/PrEnergyCountHwc1/get
+        payload: '?9'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/PrEnergySumHc1/get
+        payload: '?9'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/bai/PrEnergyCountHc1/get
+        payload: '?9'
+

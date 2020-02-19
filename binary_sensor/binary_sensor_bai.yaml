@@ -1,0 +1,46 @@
+################################################################################
+# BAI sensors
+################################################################################
+- platform: mqtt
+  name: "ebusd BAI flame status"
+  state_topic: "ebusd/bai/Flame"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: {on|off}
+  payload_on: "on"
+  payload_off: "off"
+
+- platform: mqtt
+  name: "ebusd BAI HWC circulation pump"
+  state_topic: "ebusd/bai/CirPump"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: {on|off}
+  payload_on: "on"
+  payload_off: "off"
+
+- platform: mqtt
+  name: "ebusd BAI heating pump"
+  state_topic: "ebusd/bai/WP"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: {on|off}
+  payload_on: "on"
+  payload_off: "off"
+
+- platform: mqtt
+  name: "ebusd BAI external heating pump"
+  state_topic: "ebusd/bai/extWP"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: {on|off}
+  payload_on: "on"
+  payload_off: "off"

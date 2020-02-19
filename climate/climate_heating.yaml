@@ -1,0 +1,66 @@
+- platform: mqtt
+  name: "Day temperature"
+  qos: 1
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  temperature_state_topic: "ebusd/b7v/z1DayTemp"
+  temperature_command_topic: "ebusd/b7v/z1DayTemp/set"
+  current_temperature_topic: "ebusd/b7v/z1DayTemp"
+  modes:
+
+- platform: mqtt
+  name: "Night temperature"
+  qos: 1
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  temperature_state_topic: "ebusd/b7v/z1NightTemp"
+  temperature_command_topic: "ebusd/b7v/z1NightTemp/set"
+  current_temperature_topic: "ebusd/b7v/z1NightTemp"
+  modes:
+
+- platform: mqtt
+  name: "Thermostat Mode"
+  qos: 1
+  # Availability: gate on signal available.
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  # Current
+  current_temperature_topic: "ebusd/b7v/z1RoomTemp"
+  current_temperature_template: >
+    {{ '%0.1f' | format(value | float) }}
+  # Current action/status: expects idle, cooling, heating, drying, or off.
+  action_topic: "ebusd/b7v/Hc1Status"
+  action_template: >
+    {% set values = { '0':'idle', '1':'heating' } %}
+    {{ values[value] if value in values.keys() else 'idle' }}
+  # Mode control: expects auto, off, cool, heat, dry, fan_only
+  # but VRC has 0=off;1=modulating;2=thermostat
+  # Map off->off, auto->modulating, heat->thermostat
+  mode_state_topic: "ebusd/b7v/Hc1RoomTempSwitchOn"
+  mode_state_template: >
+    {% set values = { 'off':'off', 'modulating':'auto', 'thermostat':'heat' } %}
+    {{ values[value] if value in values.keys() else 'idle' }}
+  # FIXME: mode_command_topic has no value template, so climate control
+  # will send mode as a string "modes[i]" to the MQTT topic, which
+  # results in "auto" instead of "modulating" and "heat" instead of termostat
+  # Work this around as described https://community.home-assistant.io/t/enhanced-version-of-mqtt-hvac-climate-platform-with-proper-history-chart/75304/31
+  mode_command_topic: "quirk_ebusd_b7v_Hc1RoomTempSwitchOn_set"
+  # FIXME: off requires quotes for some reason to be displayed in the card
+  modes:
+    - 'off'
+    - auto
+    - heat
+  temperature_command_topic: "ebusd/b7v/z1ActualRoomTempDesired/set"
+  temperature_state_topic: "ebusd/b7v/z1ActualRoomTempDesired"
+  temp_step: 0.5
+  initial: 18
+  min_temp: 12
+  max_temp: 24
+  temperature_high_state_topic: "ebusd/b7v/z1DayTemp"
+  temperature_high_command_topic: "ebusd/b7v/z1DayTemp/set"
+  temperature_low_state_topic: "ebusd/b7v/z1NightTemp"
+  temperature_low_command_topic: "ebusd/b7v/z1NightTemp/set"
+

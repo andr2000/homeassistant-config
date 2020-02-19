@@ -1,0 +1,20 @@
+################################################################################
+# Force ebusd scanning - triggered on signal going into "true" state
+################################################################################
+# FIXME: These automations initialize when the binary_sensor.ebusd_signal_acquired
+# has already fired on start up, so subscribe via MQTT directly
+################################################################################
+- alias: 'ebusd force ebusd scanning'
+  trigger:
+    - platform: mqtt
+      topic: "ebusd/global/signal"
+      payload: 'true'
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/scan.08/id/get
+        payload: '?'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/scan.15/id/get
+        payload: '?'

@@ -5,17 +5,35 @@
             "views": [
                 {
                     "badges": [
-                        "binary_sensor.updater",
-                        "person.oleksandr",
-                        "device_tracker.oleksandr_s_nexus_5x",
                         "sun.sun"
                     ],
                     "cards": [
                         {
-                            "entity": "sensor.b7v_displayedoutsidetemp",
+                            "entity": "sensor.ebusd_system_time",
+                            "name": "e-bus system time",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.uptime",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.ebusd_outside_temperature",
                             "graph": "line",
                             "name": "Outside",
                             "type": "sensor"
+                        },
+                        {
+                            "entity": "sensor.gas_meter",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "climate.thermostat_mode",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "climate.hot_water",
+                            "type": "thermostat"
                         }
                     ],
                     "path": "default_view",
@@ -26,86 +44,149 @@
                     "cards": [
                         {
                             "entities": [
-                                "binary_sensor.ebusd_connected"
+                                {
+                                    "entity": "binary_sensor.ebusd_connected"
+                                },
+                                {
+                                    "entity": "binary_sensor.ebusd_signal_acquired"
+                                },
+                                {
+                                    "entity": "binary_sensor.ebusd_bai_connected"
+                                },
+                                {
+                                    "entity": "binary_sensor.ebusd_vrc700f_4_connected"
+                                }
                             ],
-                            "hours_to_show": 24,
-                            "refresh_interval": 0,
-                            "title": "e-bus signal",
-                            "type": "history-graph"
+                            "show_name": true,
+                            "title": "e-bus status",
+                            "type": "glance"
                         },
                         {
                             "entities": [
-                                "switch.sonoff_power"
+                                {
+                                    "entity": "binary_sensor.boiler_room_relays"
+                                },
+                                {
+                                    "entity": "switch.hc_pump"
+                                },
+                                {
+                                    "entity": "switch.hwc_pump"
+                                },
+                                {
+                                    "entity": "switch.aux_relay_3"
+                                },
+                                {
+                                    "entity": "switch.aux_relay_4"
+                                }
                             ],
-                            "title": "HWC pump",
-                            "type": "entities"
+                            "type": "glance"
                         },
                         {
-                            "entity": "sensor.bai_flowtemp",
+                            "entity": "sensor.ebusd_bai_flow_temperature",
                             "graph": "line",
+                            "name": "Flow",
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.bai_flame",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "sensor.bai_returntemp",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "sensor.b7v_hc1actualflowtempdesired",
+                            "entity": "sensor.ebusd_bai_return_temperature",
                             "graph": "line",
+                            "name": "Return",
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.b7v_hwcstoragetemp",
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.ebusd_bai_flame_status"
+                                }
+                            ],
+                            "title": "BAI",
+                            "type": "glance"
+                        },
+                        {
+                            "entity": "sensor.ebusd_bai_pump_power",
                             "graph": "line",
+                            "hours_to_show": 48,
+                            "name": "Pump power",
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.b7v_hwctempdesired",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "sensor.b7v_z1daytemp",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "sensor.b7v_z1nighttemp",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "sensor.b7v_z1roomtemp",
+                            "entity": "sensor.ebusd_bai_water_pressure",
                             "graph": "line",
+                            "name": "Water pressure",
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.b7v_z1actualroomtempdesired",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "sensor.bai_flowtempdesired",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "sensor.bai_modulationtempdesired",
+                            "entity": "sensor.ebusd_bai_heating_power",
                             "graph": "line",
+                            "hours_to_show": 48,
+                            "name": "Heating power",
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.bai_pumppower",
+                            "entity": "sensor.ebusd_bai_valve_position",
                             "graph": "line",
+                            "hours_to_show": 48,
+                            "name": "Valve position",
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.bai_waterpressure",
-                            "graph": "line",
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.ebusd_bai_hwc_circulation_pump"
+                                }
+                            ],
+                            "show_name": false,
+                            "title": "HWC circulation pump",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.ebusd_bai_heating_pump"
+                                }
+                            ],
+                            "title": "HC pump",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.ebusd_bai_external_heating_pump"
+                                }
+                            ],
+                            "title": "HC ext pump",
+                            "type": "glance"
+                        },
+                        {
+                            "entity": "sensor.ebusd_vrc700f_4_zone1_heating_curve",
+                            "hours_to_show": 48,
                             "type": "sensor"
                         }
                     ],
                     "path": "vaillant",
                     "title": "Vaillant"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "sensor.gas_daily_peak",
+                            "graph": "line",
+                            "hours_to_show": 48,
+                            "name": "Gas daily",
+                            "type": "sensor",
+                            "unit": "m3"
+                        },
+                        {
+                            "entity": "sensor.gas_monthly_peak",
+                            "graph": "line",
+                            "hours_to_show": 48,
+                            "name": "Gas monthly",
+                            "type": "sensor"
+                        }
+                    ],
+                    "path": "meters",
+                    "title": "Meters"
                 }
             ]
         }

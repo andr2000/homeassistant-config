@@ -1,0 +1,27 @@
+################################################################################
+# broadcast sensors
+################################################################################
+- platform: mqtt
+  name: "ebusd outside temperature"
+  device_class: temperature
+  unit_of_measurement: "°C"
+  state_topic: "ebusd/broadcast/outsidetemp"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 16.0
+  value_template: >
+    {{ '%0.1f' | format(value | float) }}
+
+- platform: mqtt
+  name: "ebusd system time"
+  state_topic: "ebusd/broadcast/vdatetime"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 22:26:32;26.10.2019
+  value_template: >
+    {% set values = value.split(";") %}
+    {{ '%s %s' | format(values[1], values[0]) }}

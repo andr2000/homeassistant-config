@@ -1,0 +1,31 @@
+################################################################################
+# Periodically check e-bus system date/time and sync it if needed.
+# This is especially needed after BAI has been switched for more than
+# 20 minutes (not confirmed) and then VRC's clock deviates heavily
+# Update VRC700f/4 time if time difference is more then 5 minutes
+################################################################################
+- alias: 'VRC700f/4 date/time check'
+  trigger:
+    platform: state
+    entity_id: sensor.ebusd_system_time
+  condition:
+    condition: template
+    # value: 10.11.2019 11:10:02
+    value_template: >
+      {% set ebus_date,ebus_time=states('sensor.ebusd_system_time').split(' ') %}
+      {% set ebus_dt=strptime(ebus_date+' '+ebus_time, '%d.%m.%Y %H:%M:%S') %}
+      {% set delta=(as_timestamp(now().replace(microsecond=0))-as_timestamp(ebus_dt)) | abs %}
+      {{ delta > 300 }}
+  action:
+    - service: notify.telegram
+      data:
+        message: "e-bus system time adjustment: was {{ states('sensor.ebusd_system_time') }}
+          now {{ now().strftime('%d.%m.%Y %H:%M:%S') }}"
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/Time/set
+        payload: "{{ now().strftime('%H:%M:%S') }}"
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/Date/set
+        payload: "{{ now().strftime('%d.%m.%Y') }}"

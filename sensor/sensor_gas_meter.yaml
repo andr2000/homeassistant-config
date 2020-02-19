@@ -1,0 +1,20 @@
+- platform: template
+  sensors:
+    gas_meter:
+      friendly_name: Gas meter
+      unit_of_measurement: m3
+      entity_id:
+        - sensor.ebusd_bai_heating_energy_sum
+        - sensor.ebusd_bai_hwc_energy_sum
+      value_template: >
+        {% set cur_hc1 = states('sensor.ebusd_bai_heating_energy_sum') | int %}
+        {% set cur_hwc1 = states('sensor.ebusd_bai_hwc_energy_sum') | int %}
+        {% if (cur_hc1 == 0) or (cur_hwc1 == 0) %}
+          {{ states('sensor.gas_meter') }}
+        {% else %}
+          {# Current released jinja2.3.10 package doesn't support floats in scientific
+             notation, so work this around #}
+          {% set X = [0.1158050100096748/10**5, 0.49738739149293615/10**6, -208.8643503264944] %}
+          {% set result = X[0] * cur_hc1 + X[1] * cur_hwc1 + X[2] %}
+          {{ '%0.3f' | format(result | float) }}
+        {% endif %}

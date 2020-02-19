@@ -1,0 +1,40 @@
+- platform: mqtt
+  name: "Hot water"
+  qos: 1
+  # Availability: gate on signal available.
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  # Current
+  current_temperature_topic: "ebusd/b7v/HwcStorageTemp"
+  current_temperature_template: >
+    {{ '%0.1f' | format(value | float) }}
+  # Current action/status: expects idle, cooling, heating, drying, or off.
+  # FIXME: detect the mode indirectly via tracking the valve position
+  action_topic: "ebusd/bai/PositionValveSet"
+  action_template: >
+    {% set values = { '100':'heating' } %}
+    {{ values[value] if value in values.keys() else 'idle' }}
+  # Mode control: expects auto, off, cool, heat, dry, fan_only
+  # but VRC has 0=off;1=auto;2=day
+  # Map off->off, auto->auto, heating->day
+  mode_state_topic: "ebusd/b7v/HwcOpMode"
+  mode_state_template: >
+    {% set values = { 'off':'off', 'auto':'auto', 'day':'heat' } %}
+    {{ values[value] if value in values.keys() else 'idle' }}
+  # FIXME: mode_command_topic has no value template, so climate control
+  # will send mode as a string "modes[i]" to the MQTT topic, which
+  # results in "heat" instead of "day"
+  # Work this around as described https://community.home-assistant.io/t/enhanced-version-of-mqtt-hvac-climate-platform-with-proper-history-chart/75304/31
+  mode_command_topic: "quirk_ebusd_b7v_HwcOpMode_set"
+  # FIXME: off requires quotes for some reason to be displayed in the card
+  modes:
+    - 'off'
+    - auto
+    - heat
+  temperature_command_topic: "ebusd/b7v/HwcTempDesired/set"
+  temperature_state_topic: "ebusd/b7v/HwcTempDesired"
+  temp_step: 1
+  initial: 60
+  min_temp: 40
+  max_temp: 75

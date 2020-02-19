@@ -1,0 +1,27 @@
+################################################################################
+# This automation is a part of the workaround described
+# https://community.home-assistant.io/t/enhanced-version-of-mqtt-hvac-climate-platform-with-proper-history-chart/75304/31
+################################################################################
+- alias: 'HVAC mode quirk'
+  trigger:
+    platform: mqtt
+    topic: quirk_ebusd_b7v_Hc1RoomTempSwitchOn_set
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: ebusd/b7v/Hc1RoomTempSwitchOn/set
+      payload: >
+        {% set values = { 'off':'off', 'auto':'modulating', 'heat':'thermostat' } %}
+        {{ values[trigger.payload] if trigger.payload in values.keys() else "modulating" }}
+
+- alias: 'HVAC HWC mode quirk'
+  trigger:
+    platform: mqtt
+    topic: quirk_ebusd_b7v_HwcOpMode_set
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: ebusd/b7v/HwcOpMode/set
+      payload: >
+        {% set values = { 'off':'off', 'auto':'auto', 'heat':'day' } %}
+        {{ values[trigger.payload] if trigger.payload in values.keys() else "off" }}
