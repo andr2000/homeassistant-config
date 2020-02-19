@@ -15,7 +15,7 @@
       {% set ebus_date,ebus_time=states('sensor.ebusd_system_time').split(' ') %}
       {% set ebus_dt=strptime(ebus_date+' '+ebus_time, '%d.%m.%Y %H:%M:%S') %}
       {% set delta=(as_timestamp(now().replace(microsecond=0))-as_timestamp(ebus_dt)) | abs %}
-      {{ delta > 300 }}
+      {{ delta > 60 }}
   action:
     - service: notify.telegram
       data:
