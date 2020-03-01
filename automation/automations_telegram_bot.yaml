@@ -55,8 +55,13 @@
 
           Flow {{ states('sensor.ebusd_bai_flow_temperature') }} (desired {{ states('sensor.ebusd_vrc700f_4_flow_desired') }}) Return {{ states('sensor.ebusd_bai_return_temperature') }} Flame {{ states('binary_sensor.ebusd_bai_flame_status') }}
 
-          Power {{ states('sensor.ebusd_bai_heating_power') }} kW Pump power {{ states('sensor.ebusd_bai_pump_power') }}% {{ states('sensor.gas_meter') }} m3
+          Power {{ states('sensor.ebusd_bai_heating_power') }} kW Pump power {{ states('sensor.ebusd_bai_pump_power') }}%
 
+          HC pump {{ states('binary_sensor.ebusd_bai_heating_pump') }} ext pump switch {{ states('switch.hc_pump') }}
+
+          Pressure {{ states('sensor.ebusd_bai_water_pressure') }}Bar
+
+          Gas {{ states('sensor.gas_meter') }} m3 daily {{ states('sensor.gas_daily_peak') }} m3
 
           Room: current {{ state_attr('climate.thermostat_mode', 'current_temperature') }} night {{ state_attr('climate.night_temperature', 'current_temperature') }} day {{ state_attr('climate.day_temperature', 'current_temperature') }}
 
