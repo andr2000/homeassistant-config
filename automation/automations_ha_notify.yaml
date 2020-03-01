@@ -1,0 +1,20 @@
+################################################################################
+# Notify on Home Assistant state changes
+################################################################################
+- alias: 'on HA start'
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+    - service: notify.all
+      data:
+        message: "Home Assistant started"
+
+- alias: 'on HA shutdown'
+  trigger:
+  - event: shutdown
+    platform: homeassistant
+  action:
+    - service: notify.all
+      data:
+        message: "Home Assistant shuts down"
