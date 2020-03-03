@@ -1,0 +1,22 @@
+################################################################################
+# Notify on planned power outage
+################################################################################
+- alias: 'on planned power outage'
+  trigger:
+    platform: state
+    entity_id: sensor.planned_power_outage
+    to: 'planned'
+  action:
+    - service: notify.all
+      data:
+        message: "
+          *Planned power outage has been scheduled:*
+
+          Upcoming:
+
+          {{ state_attr('sensor.planned_power_outage', 'upcoming') }}
+
+          Active:
+
+          {{ state_attr('sensor.planned_power_outage', 'active') }}
+        "
