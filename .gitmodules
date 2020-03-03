@@ -1,0 +1,3 @@
+[submodule "power_outage/html_table_parser"]
+	path = power_outage/html_table_parser
+	url = https://github.com/schmijos/html-table-parser-python3.git
