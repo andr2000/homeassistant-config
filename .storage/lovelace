@@ -34,6 +34,10 @@
                         {
                             "entity": "climate.hot_water",
                             "type": "thermostat"
+                        },
+                        {
+                            "entity": "sensor.planned_power_outage",
+                            "type": "sensor"
                         }
                     ],
                     "path": "default_view",
