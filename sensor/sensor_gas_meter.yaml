@@ -14,7 +14,7 @@
         {% else %}
           {# Current released jinja2.3.10 package doesn't support floats in scientific
              notation, so work this around #}
-          {% set X = [0.1184391197906077/10**5, 0.17250609705099904/10**6, -223.47149741513766] %}
+          {% set X = [0.11315312489465107/10**5, 0.11654338872181673/10**5, -227.53822528181823] %}
           {% set result = X[0] * cur_hc1 + X[1] * cur_hwc1 + X[2] %}
           {{ '%0.3f' | format(result | float) }}
         {% endif %}
