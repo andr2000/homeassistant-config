@@ -1,0 +1,13 @@
+# VRC 700f/4 one time water switch
+- platform: mqtt
+  name: "One time water"
+  state_topic: "ebusd/b7v/HwcSFMode"
+  command_topic: "ebusd/b7v/HwcSFMode/set"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  payload_on: "load"
+  payload_off: "auto"
+  state_on: "load"
+  state_off: "auto"
+  qos: 1

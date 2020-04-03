@@ -38,6 +38,12 @@
                         {
                             "entity": "sensor.planned_power_outage",
                             "type": "sensor"
+                        },
+                        {
+                            "entities": [
+                                "switch.one_time_water"
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "path": "default_view",
