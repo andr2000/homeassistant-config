@@ -42,6 +42,14 @@
                         },
                         {
                             "entities": [
+                                "switch.aux_sonoff",
+                                "binary_sensor.aux_sonoff_status"
+                            ],
+                            "title": "Auxiliary switch",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
                                 "switch.one_time_water"
                             ],
                             "type": "entities"
