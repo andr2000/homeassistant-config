@@ -20,6 +20,7 @@
                         {
                             "entity": "sensor.ebusd_outside_temperature",
                             "graph": "line",
+                            "hours_to_show": 72,
                             "name": "Outside",
                             "type": "sensor"
                         },
