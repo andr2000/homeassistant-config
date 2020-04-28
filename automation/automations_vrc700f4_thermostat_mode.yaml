@@ -14,6 +14,31 @@
         {% set values = { 'off':'off', 'auto':'modulating', 'heat':'thermostat' } %}
         {{ values[trigger.payload] if trigger.payload in values.keys() else "modulating" }}
 
+- alias: Set heating mode
+  trigger:
+    platform: state
+    entity_id: input_select.heating_mode
+  action:
+    service: mqtt.publish
+    data:
+      topic: ebusd/b7v/z1OpMode/set
+      # N.B. Setting to "off" will trigger VRC to set activate frost
+      # protection mode, e.g. z1ActualRoomTempDesired will be set to
+      # something like 5C (depends on VRC setting). This will make
+      # thermostat card disable temperature setting as those are above that
+      # low temp.
+      payload_template: '{{ states("input_select.heating_mode") }}'
+
+- alias: Get heating mode
+  trigger:
+    platform: mqtt
+    topic: ebusd/b7v/z1OpMode
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.heating_mode
+      option: '{{ trigger.payload }}'
+
 - alias: 'HVAC HWC mode quirk'
   trigger:
     platform: mqtt

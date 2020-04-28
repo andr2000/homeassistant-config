@@ -63,3 +63,7 @@
       data_template:
         topic: ebusd/b7v/HwcSFMode/get
         payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/z1OpMode/get
+        payload: '?2'

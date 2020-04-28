@@ -33,6 +33,10 @@
                             "type": "thermostat"
                         },
                         {
+                            "entity": "input_select.heating_mode",
+                            "type": "entity"
+                        },
+                        {
                             "entity": "climate.hot_water",
                             "type": "thermostat"
                         },

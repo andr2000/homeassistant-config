@@ -25,6 +25,17 @@ utility_meter:
     tariffs:
       - peak
 
+input_select:
+  heating_mode:
+    name: Heating mode
+    options:
+      - 'off'
+      - auto
+      - day
+      - night
+    initial: auto
+    icon: mdi:thermostat
+
 recorder:
   db_url: !secret postgresql
 
