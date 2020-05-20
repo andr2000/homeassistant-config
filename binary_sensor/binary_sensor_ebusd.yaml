@@ -31,6 +31,17 @@
   payload_not_available: "false"
   qos: 2
 
+- platform: mqtt
+  name: "ebusd scan finished"
+  device_class: connectivity
+  state_topic: "ebusd/global/scan"
+  payload_on: "finished"
+  payload_off: "running"
+  availability_topic: "ebusd/global/running"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 2
+
 ################################################################################
 # handle ebusd scan results
 # FIXME: unfortunately there are no wildcards available inside topic name,
@@ -42,9 +53,9 @@
   name: "ebusd BAI connected"
   device_class: connectivity
   state_topic: "ebusd/scan.08/id"
-  availability_topic: "ebusd/global/signal"
-  payload_available: "true"
-  payload_not_available: "false"
+  availability_topic: "ebusd/global/scan"
+  payload_available: "finished"
+  payload_not_available: "running"
   qos: 2
   value_template: >
     {% if "0010021961" in value %}
@@ -57,9 +68,9 @@
   name: "ebusd VRC700f/4 connected"
   device_class: connectivity
   state_topic: "ebusd/scan.15/id"
-  availability_topic: "ebusd/global/signal"
-  payload_available: "true"
-  payload_not_available: "false"
+  availability_topic: "ebusd/global/scan"
+  payload_available: "finished"
+  payload_not_available: "running"
   qos: 2
   value_template: >
     {% if "0020197207" in value %}

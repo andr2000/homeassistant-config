@@ -7,14 +7,10 @@
 - alias: 'ebusd force ebusd scanning'
   trigger:
     - platform: mqtt
-      topic: "ebusd/global/signal"
-      payload: 'true'
+      topic: "ebusd/global/scan"
+      payload: 'finished'
   action:
     - service: mqtt.publish
       data_template:
-        topic: ebusd/scan.08/id/get
-        payload: '?'
-    - service: mqtt.publish
-      data_template:
-        topic: ebusd/scan.15/id/get
+        topic: ebusd/scan.*/list
         payload: '?'
