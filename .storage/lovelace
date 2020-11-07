@@ -1,4 +1,6 @@
 {
+    "version": 1,
+    "key": "lovelace",
     "data": {
         "config": {
             "title": "Home",
@@ -9,6 +11,51 @@
                     ],
                     "cards": [
                         {
+                            "entity": "sensor.ebusd_outside_temperature",
+                            "graph": "line",
+                            "hours_to_show": 72,
+                            "name": "Outside",
+                            "type": "sensor"
+                        },
+                        {
+                            "entity": "climate.hot_water",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "switch.one_time_water",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "icon_height": "48px",
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "type": "button"
+                        },
+                        {
+                            "entity": "switch.hwc_pump",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "icon_height": "48px",
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "type": "button"
+                        },
+                        {
+                            "entity": "climate.central_heating",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "input_select.heating_mode",
+                            "type": "entity"
+                        },
+                        {
                             "entity": "sensor.ebusd_system_time",
                             "name": "e-bus system time",
                             "type": "sensor"
@@ -18,30 +65,7 @@
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.ebusd_outside_temperature",
-                            "graph": "line",
-                            "hours_to_show": 72,
-                            "name": "Outside",
-                            "type": "sensor"
-                        },
-                        {
                             "entity": "sensor.gas_meter",
-                            "type": "sensor"
-                        },
-                        {
-                            "entity": "climate.thermostat_mode",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "input_select.heating_mode",
-                            "type": "entity"
-                        },
-                        {
-                            "entity": "climate.hot_water",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "sensor.planned_power_outage",
                             "type": "sensor"
                         },
                         {
@@ -51,16 +75,37 @@
                             ],
                             "title": "Auxiliary switch",
                             "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "switch.one_time_water"
-                            ],
-                            "type": "entities"
                         }
                     ],
                     "path": "default_view",
                     "title": "Home"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "climate.midea_ac_20890720943210",
+                            "name": "Master bedroom",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "climate.midea_ac_19791209313981",
+                            "name": "Andrii",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "climate.midea_ac_23089744190549",
+                            "name": "Mike",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "climate.midea_ac_23089744190563",
+                            "name": "Guest bedroom",
+                            "type": "thermostat"
+                        }
+                    ],
+                    "path": "climate",
+                    "title": "Climate"
                 },
                 {
                     "badges": [],
@@ -210,10 +255,25 @@
                     ],
                     "path": "meters",
                     "title": "Meters"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "sensor.ebusd_vrc700f_4_hwc_timer_monday",
+                            "name": "Monday",
+                            "type": "entity"
+                        },
+                        {
+                            "entity": "sensor.ebusd_vrc700f_4_hwc_timer_saturday",
+                            "name": "Saturday",
+                            "type": "entity"
+                        }
+                    ],
+                    "path": "hwc-timers",
+                    "title": "HWC timers"
                 }
             ]
         }
-    },
-    "key": "lovelace",
-    "version": 1
+    }
 }
