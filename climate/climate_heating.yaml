@@ -21,7 +21,7 @@
   modes:
 
 - platform: mqtt
-  name: "Thermostat Mode"
+  name: "Central heating"
   qos: 1
   # Availability: gate on signal available.
   availability_topic: "ebusd/global/signal"
@@ -38,14 +38,14 @@
     {{ values[value] if value in values.keys() else 'idle' }}
   # Mode control: expects auto, off, cool, heat, dry, fan_only
   # but VRC has 0=off;1=modulating;2=thermostat
-  # Map off->off, auto->modulating, heat->thermostat
+  # Map off->off, auto->thermostat, heat->modulating
   mode_state_topic: "ebusd/b7v/Hc1RoomTempSwitchOn"
   mode_state_template: >
-    {% set values = { 'off':'off', 'modulating':'auto', 'thermostat':'heat' } %}
+    {% set values = { 'off':'off', 'thermostat':'auto', 'modulating':'heat' } %}
     {{ values[value] if value in values.keys() else 'idle' }}
   # FIXME: mode_command_topic has no value template, so climate control
   # will send mode as a string "modes[i]" to the MQTT topic, which
-  # results in "auto" instead of "modulating" and "heat" instead of termostat
+  # results in "auto" instead of "thermostat" and "heat" instead of modulating
   # Work this around as described https://community.home-assistant.io/t/enhanced-version-of-mqtt-hvac-climate-platform-with-proper-history-chart/75304/31
   mode_command_topic: "quirk_ebusd_b7v_Hc1RoomTempSwitchOn_set"
   # FIXME: off requires quotes for some reason to be displayed in the card

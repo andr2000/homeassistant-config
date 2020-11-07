@@ -11,7 +11,7 @@
     data_template:
       topic: ebusd/b7v/Hc1RoomTempSwitchOn/set
       payload: >
-        {% set values = { 'off':'off', 'auto':'modulating', 'heat':'thermostat' } %}
+        {% set values = { 'off':'off', 'auto':'thermostat', 'heat':'modulating' } %}
         {{ values[trigger.payload] if trigger.payload in values.keys() else 'thermostat' }}
 
 - alias: Set heating mode
