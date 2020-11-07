@@ -89,3 +89,23 @@
   # value: 0.15
   value_template: >
     {{ '%0.2f' | format(value | float) }}
+
+- platform: mqtt
+  unique_id: hwc_timer_monday
+  name: "ebusd VRC700f/4 HWC timer Monday"
+  state_topic: "ebusd/b7v/hwcTimer.Monday"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 07:30;08:30;19:30;22:00;-:-;-:-
+
+- platform: mqtt
+  unique_id: hwc_timer_saturday
+  name: "ebusd VRC700f/4 HWC timer Saturday"
+  state_topic: "ebusd/b7v/hwcTimer.Saturday"
+  availability_topic: "ebusd/global/signal"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+  # value: 07:30;08:30;19:30;22:00;-:-;-:-

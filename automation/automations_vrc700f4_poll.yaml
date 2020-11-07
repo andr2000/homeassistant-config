@@ -67,3 +67,11 @@
       data_template:
         topic: ebusd/b7v/z1OpMode/get
         payload: '?2'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/hwcTimer.Monday/get
+        payload: '?9'
+    - service: mqtt.publish
+      data_template:
+        topic: ebusd/b7v/hwcTimer.Saturday/get
+        payload: '?9'
