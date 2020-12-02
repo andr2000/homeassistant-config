@@ -69,6 +69,10 @@ influxdb:
       - sensor.ebusd_vrc700f_4_night_temperature
       - sensor.ebusd_vrc700f_4_room_temperature
       - sensor.ebusd_vrc700f_4_zone1_heating_curve
+      - sensor.midea_ac_andrii_temperature
+      - sensor.midea_ac_guest_temperature
+      - sensor.midea_ac_master_temperature
+      - sensor.midea_ac_mike_temperature
       - binary_sensor.ebusd_bai_external_heating_pump
       - binary_sensor.ebusd_bai_heating_pump
       - binary_sensor.ebusd_bai_hwc_circulation_pump

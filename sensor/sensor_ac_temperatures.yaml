@@ -1,0 +1,24 @@
+- platform: template
+  sensors:
+    midea_ac_master_temperature:
+      friendly_name: "Master bedroom AC temperature"
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.midea_ac_master', 'current_temperature') }}"
+- platform: template
+  sensors:
+    midea_ac_mike_temperature:
+      friendly_name: "Mike AC temperature"
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.midea_ac_mike', 'current_temperature') }}"
+- platform: template
+  sensors:
+    midea_ac_andrii_temperature:
+      friendly_name: "Andrii AC temperature"
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.midea_ac_andrii', 'current_temperature') }}"
+- platform: template
+  sensors:
+    midea_ac_guest_temperature:
+      friendly_name: "Guest bedroom AC temperature"
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.midea_ac_guest', 'current_temperature') }}"
