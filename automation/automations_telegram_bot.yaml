@@ -14,13 +14,13 @@
           Climate is {{ state_attr('climate.central_heating', 'hvac_action') }}
           and the current temperature is {{ state_attr('climate.central_heating', 'current_temperature') }}
 
-          AC Master bedroom is {{ states('climate.midea_ac_20890720943210') }} and the current temperature is {{ state_attr('climate.midea_ac_20890720943210', 'current_temperature') }}
+          AC Master bedroom is {{ states('climate.midea_ac_master') }} and the current temperature is {{ state_attr('climate.midea_ac_master', 'current_temperature') }}
 
-          AC Andrii is {{ states('climate.midea_ac_19791209313981') }} and the current temperature is {{ state_attr('climate.midea_ac_19791209313981', 'current_temperature') }}
+          AC Andrii is {{ states('climate.midea_ac_andrii') }} and the current temperature is {{ state_attr('climate.midea_ac_andrii', 'current_temperature') }}
 
-          AC Mike is {{ states('climate.midea_ac_23089744190549') }} and the current temperature is {{ state_attr('climate.midea_ac_23089744190549', 'current_temperature') }}
+          AC Mike is {{ states('climate.midea_ac_mike') }} and the current temperature is {{ state_attr('climate.midea_ac_mike', 'current_temperature') }}
 
-          AC Guest bedroom is {{ states('climate.midea_ac_23089744190563') }} and the current temperature is {{ state_attr('climate.midea_ac_23089744190563', 'current_temperature') }}
+          AC Guest bedroom is {{ states('climate.midea_ac_guest') }} and the current temperature is {{ state_attr('climate.midea_ac_guest', 'current_temperature') }}
 
           HWC is {{ state_attr('climate.hot_water', 'hvac_action') }}
           and the current temperature is {{ state_attr('climate.hot_water','current_temperature') }}
@@ -75,9 +75,9 @@
 
           Hwc: current {{ states('sensor.ebusd_vrc700f_4_hwc_storage_temperature') }} target {{ states('sensor.ebusd_vrc700f_4_hwc_desired_temperature') }}
 
-          Master {{ states('climate.midea_ac_20890720943210') }} at {{ state_attr('climate.midea_ac_20890720943210', 'current_temperature') }}
-          Guest {{ states('climate.midea_ac_23089744190563') }} at {{ state_attr('climate.midea_ac_23089744190563', 'current_temperature') }}
+          Master {{ states('climate.midea_ac_master') }} at {{ state_attr('climate.midea_ac_master', 'current_temperature') }}
+          Guest {{ states('climate.midea_ac_guest') }} at {{ state_attr('climate.midea_ac_guest', 'current_temperature') }}
 
-          Andrii {{ states('climate.midea_ac_19791209313981') }} at {{ state_attr('climate.midea_ac_19791209313981', 'current_temperature') }}
-          Mike {{ states('climate.midea_ac_23089744190549') }} at {{ state_attr('climate.midea_ac_23089744190549', 'current_temperature') }}
+          Andrii {{ states('climate.midea_ac_andrii') }} at {{ state_attr('climate.midea_ac_andrii', 'current_temperature') }}
+          Mike {{ states('climate.midea_ac_mike') }} at {{ state_attr('climate.midea_ac_mike', 'current_temperature') }}
         "

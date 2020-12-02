@@ -84,24 +84,23 @@
                     "badges": [],
                     "cards": [
                         {
-                            "entity": "climate.midea_ac_20890720943210",
-                            "name": "Master bedroom",
-                            "type": "thermostat"
+                            "type": "thermostat",
+                            "entity": "climate.midea_ac_master",
+                            "name": "Master bedroom"
                         },
                         {
-                            "entity": "climate.midea_ac_19791209313981",
-                            "name": "Andrii",
-                            "type": "thermostat"
+                            "type": "thermostat",
+                            "entity": "climate.midea_ac_mike"
                         },
                         {
-                            "entity": "climate.midea_ac_23089744190549",
-                            "name": "Mike",
-                            "type": "thermostat"
+                            "type": "thermostat",
+                            "entity": "climate.midea_ac_andrii",
+                            "name": "Andrii"
                         },
                         {
-                            "entity": "climate.midea_ac_23089744190563",
-                            "name": "Guest bedroom",
-                            "type": "thermostat"
+                            "type": "thermostat",
+                            "entity": "climate.midea_ac_guest",
+                            "name": "Guest bedroom"
                         }
                     ],
                     "path": "climate",
