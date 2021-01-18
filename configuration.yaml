@@ -73,6 +73,7 @@ influxdb:
       - sensor.midea_ac_guest_temperature
       - sensor.midea_ac_master_temperature
       - sensor.midea_ac_mike_temperature
+      - sensor.gas_daily_peak
       - binary_sensor.ebusd_bai_external_heating_pump
       - binary_sensor.ebusd_bai_heating_pump
       - binary_sensor.ebusd_bai_hwc_circulation_pump
