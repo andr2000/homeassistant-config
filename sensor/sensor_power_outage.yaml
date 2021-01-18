@@ -1,9 +1,0 @@
-- platform: command_line
-  name: "Planned power outage"
-  scan_interval: 43200
-  command: "cd ${PWD}/../homeassistant-config/power_outage/ && ${VIRTUAL_ENV}/bin/python3 power_outage_parser.py"
-  json_attributes:
-    - active
-    - upcoming
-    - past
-  value_template: '{{ value_json.state }}'
