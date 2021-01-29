@@ -52,6 +52,13 @@
                             "type": "thermostat"
                         },
                         {
+                            "type": "gauge",
+                            "min": 0,
+                            "entity": "sensor.ebusd_bai_heating_power",
+                            "name": "Heating power",
+                            "max": 20
+                        },
+                        {
                             "entity": "input_select.heating_mode",
                             "type": "entity"
                         },
@@ -65,16 +72,31 @@
                             "type": "sensor"
                         },
                         {
-                            "entity": "sensor.gas_meter",
-                            "type": "sensor"
-                        },
-                        {
                             "entities": [
                                 "switch.aux_sonoff",
                                 "binary_sensor.aux_sonoff_status"
                             ],
                             "title": "Auxiliary switch",
                             "type": "entities"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "sensor.gas_daily_peak",
+                                    "name": "Daily"
+                                },
+                                {
+                                    "entity": "sensor.gas_monthly_peak",
+                                    "name": "Monthly"
+                                },
+                                {
+                                    "entity": "sensor.gas_meter",
+                                    "name": "Meter"
+                                }
+                            ],
+                            "title": "Gas",
+                            "state_color": false
                         }
                     ],
                     "path": "default_view",
@@ -101,6 +123,30 @@
                             "type": "thermostat",
                             "entity": "climate.midea_ac_guest",
                             "name": "Guest bedroom"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "sensor.mike_ac_outdoor"
+                            ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "sensor.master_ac_outdoor"
+                            ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "sensor.guest_ac_outdoor"
+                            ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "sensor.andrii_ac_outdoor"
+                            ]
                         }
                     ],
                     "path": "climate",
@@ -232,28 +278,6 @@
                     ],
                     "path": "vaillant",
                     "title": "Vaillant"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entity": "sensor.gas_daily_peak",
-                            "graph": "line",
-                            "hours_to_show": 48,
-                            "name": "Gas daily",
-                            "type": "sensor",
-                            "unit": "m3"
-                        },
-                        {
-                            "entity": "sensor.gas_monthly_peak",
-                            "graph": "line",
-                            "hours_to_show": 48,
-                            "name": "Gas monthly",
-                            "type": "sensor"
-                        }
-                    ],
-                    "path": "meters",
-                    "title": "Meters"
                 },
                 {
                     "badges": [],
