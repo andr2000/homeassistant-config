@@ -1,0 +1,21 @@
+esphome:
+  name: midea_ac_${device_name}
+  platform: ESP8266
+  board: esp12e
+
+#disable logging
+logger:
+  baud_rate: 0
+
+uart:
+  tx_pin: 1
+  rx_pin: 3
+  baud_rate: 9600
+
+midea_dongle:
+
+midea_ac:
+  name: Midea_AC_${upper_devicename}
+  outdoor_temperature:
+    name: ${upper_devicename} AC outdoor
+  beeper: true

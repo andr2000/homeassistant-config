@@ -1,0 +1,6 @@
+substitutions:
+  device_name: mike
+  upper_devicename: Mike
+
+<<: !include midea_common.yaml
+<<: !include wifi.yaml

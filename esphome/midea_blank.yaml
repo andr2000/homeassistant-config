@@ -1,0 +1,6 @@
+substitutions:
+  device_name: blank
+  upper_devicename: Blank
+
+<<: !include midea_common.yaml
+<<: !include wifi.yaml

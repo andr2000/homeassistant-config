@@ -1,0 +1,18 @@
+wifi:
+  ssid: !secret esphome_wifi_ssid
+  password: !secret esphome_wifi_password
+  # connecting to a hidden WiFi network
+  fast_connect: true
+  ap:
+    ssid: ${upper_devicename} AC Fallback Hotspot"
+    password: !secret esphome_wifi_password
+
+# Enable Home Assistant API
+api:
+  password: !secret esphome_wifi_password
+
+ota:
+  password: !secret esphome_wifi_password
+
+# Enable rescue hotspot
+captive_portal:

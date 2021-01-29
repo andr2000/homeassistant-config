@@ -1,0 +1,6 @@
+substitutions:
+  device_name: andrii
+  upper_devicename: Andrii
+
+<<: !include midea_common.yaml
+<<: !include wifi.yaml

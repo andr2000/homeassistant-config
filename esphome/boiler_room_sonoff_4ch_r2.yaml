@@ -1,0 +1,92 @@
+###############################################################################
+# Boiler room relays
+###############################################################################
+substitutions:
+  device_name: boiler_room
+  upper_devicename: Boiler room
+
+esphome:
+  name: ${device_name}
+  platform: ESP8266
+  board: esp01_1m
+
+<<: !include wifi.yaml
+
+# Enable logging
+logger:
+
+###############################################################################
+# Status LED
+###############################################################################
+# - Blink slowly (about every second) when a warning is active.
+#   Warnings are active when for example reading a sensor value
+#   fails temporarily or the WiFi/MQTT connections are disrupted.
+# - Blink quickly (multiple times per second) when an error is active.
+#   Errors indicate that ESPHome has found an error while setting up.
+#   In most cases, ESPHome will still try to recover from the error
+#   and continue with all other operations.
+# - Stay off otherwise.
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes
+
+switch:
+- platform: gpio
+  name: "HC pump"
+  pin: GPIO12
+  id: hc_pump_relay
+- platform: gpio
+  name: "HWC pump"
+  pin: GPIO5
+  id: hwc_pump_relay
+- platform: gpio
+  name: "Aux Relay 3"
+  pin: GPIO4
+  id: aux_relay_3
+- platform: gpio
+  name: "Aux Relay 4"
+  pin: GPIO15
+  id: aux_relay_4
+
+binary_sensor:
+- platform: gpio
+  id: hc_pump_switch
+  pin:
+    number: GPIO0
+    mode: INPUT_PULLUP
+    inverted: True
+  on_press:
+    - switch.toggle: hc_pump_relay
+- platform: gpio
+  id: hwc_pump_switch
+  pin:
+    number: GPIO9
+    mode: INPUT_PULLUP
+    inverted: True
+  on_press:
+    - switch.toggle: hwc_pump_relay
+- platform: gpio
+  id: aux_relay_3_switch
+  pin:
+    number: GPIO10
+    mode: INPUT_PULLUP
+    inverted: True
+  on_press:
+    - switch.toggle: aux_relay_3
+- platform: gpio
+  id: aux_relay_4_switch
+  pin:
+    number: GPIO14
+    mode: INPUT_PULLUP
+    inverted: True
+  on_press:
+    - switch.toggle: aux_relay_4
+
+###############################################################################
+# Status sensor for Home Assistant
+###############################################################################
+# The Status Binary Sensor exposes the node state (if it’s
+# connected to via MQTT/native API) for Home Assistant.
+- platform: status
+  name: ${upper_devicename} relays
