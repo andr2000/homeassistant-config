@@ -19,3 +19,5 @@ midea_ac:
   outdoor_temperature:
     name: ${upper_devicename} AC outdoor
   beeper: true
+  power_usage:
+    name: ${upper_devicename} AC power
