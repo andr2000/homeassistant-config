@@ -4,7 +4,7 @@ wifi:
   # connecting to a hidden WiFi network
   fast_connect: true
   ap:
-    ssid: ${upper_devicename} AC Fallback Hotspot"
+    ssid: ${upper_devicename} Hotspot"
     password: !secret esphome_wifi_password
 
 # Enable Home Assistant API
