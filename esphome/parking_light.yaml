@@ -31,7 +31,7 @@ remote_receiver:
     number: 4
   dump: rc_switch
   filter: 250us
-  tolerance: 65%
+  tolerance: 40%
   idle: 4ms
 
 switch:
@@ -48,8 +48,8 @@ binary_sensor:
   on_press:
     - switch.toggle: ${device_name}_relay
   rc_switch_raw:
-    code: '001110000000101101001010'
-    protocol: 3
+    code: '110101111111010010110101'
+    protocol: 9
   filters:
     - delayed_off: 500ms
 - platform: remote_receiver
@@ -58,8 +58,8 @@ binary_sensor:
   on_press:
     - switch.toggle: ${device_name}_relay
   rc_switch_raw:
-    code: '001110000000101101111110'
-    protocol: 3
+    code: '110101111111010010000001'
+    protocol: 9
   filters:
     - delayed_off: 500ms
 - platform: remote_receiver

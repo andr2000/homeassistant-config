@@ -1,7 +1,10 @@
 python3 -m venv venv
 source venv/bin/activate
 pip3 install wheel
-pip3 install --upgrade git+https://github.com/dudanov/esphome.git@midea-climate-support
+#pip3 install --upgrade git+https://github.com/dudanov/esphome.git@midea-climate-support
+
+pip3 install --upgrade git+https://github.com/andr2000/esphome.git@andr2000_smarthome
+
 esphome midea_guest.yaml compile
 esphome midea_guest.yaml upload
 esphome midea_guest.yaml logs
