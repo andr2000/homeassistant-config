@@ -29,7 +29,6 @@ status_led:
 remote_receiver:
   pin:
     number: 4
-  dump: rc_switch
   filter: 250us
   tolerance: 50%
   idle: 4ms
