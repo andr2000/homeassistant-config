@@ -37,9 +37,22 @@ remote_receiver:
 switch:
 - platform: gpio
   name: '${upper_devicename}'
+  id: ${device_name}_relay
   pin:
     number: GPIO12
-  id: ${device_name}_relay
+  on_turn_on:
+    - script.execute: delayed_off_script
+  on_turn_off:
+    - script.stop: delayed_off_script
+
+script:
+  - id: delayed_off_script
+    # Start a new run after first stopping previous run.
+    mode: restart
+    then:
+      - switch.turn_on: ${device_name}_relay
+      - delay: 3600s
+      - switch.turn_off: ${device_name}_relay
 
 binary_sensor:
 - platform: remote_receiver
