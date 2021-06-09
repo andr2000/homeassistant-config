@@ -31,7 +31,7 @@ remote_receiver:
     number: 4
   dump: rc_switch
   filter: 250us
-  tolerance: 40%
+  tolerance: 50%
   idle: 4ms
 
 switch:
