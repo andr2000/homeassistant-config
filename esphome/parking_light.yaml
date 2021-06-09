@@ -97,3 +97,9 @@ binary_sensor:
 # connected to via MQTT/native API) for Home Assistant.
 - platform: status
   name: ${upper_devicename} status
+
+# Send WiFi signal strength & uptime to HA
+sensor:
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Strength
+    update_interval: 60s
