@@ -40,6 +40,8 @@ switch:
   id: ${device_name}_relay
   pin:
     number: GPIO12
+  # Always initialize the pin as OFF on bootup.
+  restore_mode: ALWAYS_OFF
   on_turn_on:
     - script.execute: delayed_off_script
   on_turn_off:
