@@ -52,15 +52,15 @@
                             "type": "thermostat"
                         },
                         {
+                            "entity": "input_select.heating_mode",
+                            "type": "entity"
+                        },
+                        {
                             "type": "gauge",
                             "min": 0,
                             "entity": "sensor.ebusd_bai_heating_power",
                             "name": "Heating power",
                             "max": 20
-                        },
-                        {
-                            "entity": "input_select.heating_mode",
-                            "type": "entity"
                         },
                         {
                             "entity": "sensor.ebusd_system_time",
