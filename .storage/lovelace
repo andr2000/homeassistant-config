@@ -97,6 +97,21 @@
                             ],
                             "title": "Gas",
                             "state_color": false
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.parking_light"
+                                },
+                                {
+                                    "entity": "binary_sensor.parking_light_status"
+                                },
+                                {
+                                    "entity": "sensor.parking_light_wifi_strength"
+                                }
+                            ],
+                            "title": "Parking light",
+                            "type": "entities"
                         }
                     ],
                     "path": "default_view",
