@@ -24,6 +24,26 @@ utility_meter:
     cycle: monthly
     tariffs:
       - peak
+  ac_andrii:
+    source: sensor.andrii_ac_power
+    cycle: monthly
+    tariffs:
+      - peak
+  ac_mike:
+    source: sensor.mike_ac_power
+    cycle: monthly
+    tariffs:
+      - peak
+  ac_master:
+    source: sensor.master_ac_power
+    cycle: monthly
+    tariffs:
+      - peak
+  ac_guest:
+    source: sensor.guest_ac_power
+    cycle: monthly
+    tariffs:
+      - peak
 
 input_select:
   heating_mode:

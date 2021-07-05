@@ -142,25 +142,57 @@
                         {
                             "type": "entities",
                             "entities": [
-                                "sensor.mike_ac_outdoor"
+                                {
+                                    "entity": "sensor.mike_ac_outdoor"
+                                },
+                                {
+                                    "entity": "sensor.mike_ac_power"
+                                },
+                                {
+                                    "entity": "sensor.ac_mike_peak"
+                                }
                             ]
                         },
                         {
                             "type": "entities",
                             "entities": [
-                                "sensor.master_ac_outdoor"
+                                {
+                                    "entity": "sensor.master_ac_outdoor"
+                                },
+                                {
+                                    "entity": "sensor.master_ac_power"
+                                },
+                                {
+                                    "entity": "sensor.ac_master_peak"
+                                }
                             ]
                         },
                         {
                             "type": "entities",
                             "entities": [
-                                "sensor.guest_ac_outdoor"
+                                {
+                                    "entity": "sensor.guest_ac_outdoor"
+                                },
+                                {
+                                    "entity": "sensor.guest_ac_power"
+                                },
+                                {
+                                    "entity": "sensor.ac_guest_peak"
+                                }
                             ]
                         },
                         {
                             "type": "entities",
                             "entities": [
-                                "sensor.andrii_ac_outdoor"
+                                {
+                                    "entity": "sensor.andrii_ac_outdoor"
+                                },
+                                {
+                                    "entity": "sensor.andrii_ac_power"
+                                },
+                                {
+                                    "entity": "sensor.ac_andrii_peak"
+                                }
                             ]
                         }
                     ],
