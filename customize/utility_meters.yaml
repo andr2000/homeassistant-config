@@ -1,0 +1,11 @@
+sensor.ac_mike_peak:
+  friendly_name: Mike AC meter
+
+sensor.ac_andrii_peak:
+  friendly_name: Andrii AC meter
+
+sensor.ac_guest_peak:
+  friendly_name: Guest AC meter
+
+sensor.ac_master_peak:
+  friendly_name: Master AC meter
